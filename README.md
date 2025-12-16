@@ -11,6 +11,14 @@ Este contenedor Docker ejecuta un script Python con Selenium de ejemplo que:
 
 ## 1 📦 Requisitos Previos
 
+### Git (Requerido)
+- **Windows**: Descargar e instalar desde [git-scm.com](https://git-scm.com/download/win)
+- **Mac**: Descargar desde [git-scm.com](https://git-scm.com/download/mac)
+- **Linux**: Ejecutar:
+  ```bash
+  sudo apt-get install git
+  ```
+
 ### Para instalar Docker
 - **Windows/Mac**: Descargar [Docker Desktop](https://www.docker.com/products/docker-desktop)
 - **Linux**: Ejecutar:
