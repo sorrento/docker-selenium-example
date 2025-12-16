@@ -7,5 +7,5 @@ services:
     volumes:
       - ./output:/app/output
     environment:
-      - TZ=America/Caracas
-    restart: unless-stopped
+      - TZ=America/Santiago
+    restart: no

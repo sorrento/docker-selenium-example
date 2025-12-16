@@ -434,9 +434,11 @@ def search_google_news(search_query, retry_count=0, headless=None, search_engine
             print(f"{'='*70}\n")
             
             log_info("Guardando resultado en archivo JSON...")
-            with open("resultado_busqueda.json", "w", encoding="utf-8") as f:
+            output_file = "output/resultado_busqueda.json"
+            os.makedirs("output", exist_ok=True)
+            with open(output_file, "w", encoding="utf-8") as f:
                 json.dump(result_data, f, ensure_ascii=False, indent=2)
-            log_success("Archivo 'resultado_busqueda.json' guardado correctamente")
+            log_success(f"Archivo guardado en: {output_file}")
             
             log_success("✅ PROCESO COMPLETADO CON ÉXITO")
             return result_data

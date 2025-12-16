@@ -9,7 +9,7 @@ Este contenedor Docker ejecuta un script Python con Selenium de ejemplo que:
 
 ---
 
-## 📦 Requisitos Previos
+## 1 📦 Requisitos Previos
 
 ### Para instalar Docker
 - **Windows/Mac**: Descargar [Docker Desktop](https://www.docker.com/products/docker-desktop)
@@ -27,7 +27,7 @@ docker-compose --version
 
 ---
 
-## � Descargar desde GitHub
+## 2 Descargar desde GitHub 
 
 ### Opción A: Clonar el repositorio (Recomendado)
 
@@ -52,54 +52,47 @@ docker-compose --version
 
 ## �🚀 Instalación y Ejecución
 
-### Opción 1: Windows - Hacer doble clic (MÁS FÁCIL)
+### Paso 1: Verificar que Docker está corriendo
+- En Windows: Abre **Docker Desktop** y espera a que el icono esté en verde
+- En Linux/Mac: Abre una terminal y verifica con `docker --version`
 
-1. **Descargar/Copiar la carpeta** `DOCKER_DUMMY` en tu máquina
+### Paso 2: Abrir terminal en la carpeta DOCKER_DUMMY
+- Windows: Usa PowerShell o CMD
+- Linux/Mac: Abre Terminal
+- Navega a la carpeta del proyecto
 
-2. **Hacer doble clic en** `ejecutar.bat`
+### Paso 3: Construir la imagen Docker
 
-3. El script automáticamente:
-   - Verifica que Docker esté instalado ✓
-   - Verifica que Docker esté corriendo ✓
-   - Construye la imagen
-   - Ejecuta el contenedor
-   - Muestra si hubo errores
+```bash
+docker-compose build
+```
 
-4. **Ver resultados**:
-   - El archivo `resultado_busqueda.json` estará en la carpeta
+Esta es la primera vez que ejecutas. Espera a que termine (descarga e instala todo).
 
-### Opción 2: Con Docker Compose (Terminal)
+### Paso 4: Ejecutar el contenedor
 
-1. **Descargar/Copiar la carpeta** `DOCKER_DUMMY` en tu máquina
+```bash
+docker-compose up
+```
 
-2. **Abrir PowerShell o CMD** en la carpeta
+El contenedor se ejecutará, realizará la búsqueda y guardará el resultado en `resultado_busqueda.json`.
 
-3. **Construir la imagen**:
-   ```bash
-   docker-compose build
-   ```
+### Paso 5: Ver resultados
 
-4. **Ejecutar el contenedor**:
-   ```bash
-   docker-compose up
-   ```
+Cuando el contenedor termine, verás un archivo `resultado_busqueda.json` en la carpeta con los resultados de la búsqueda.
 
-5. **Ver resultados**:
-   - El archivo `resultado_busqueda.json` se guardará en la carpeta
+---
 
-### Opción 2: Con Docker Directo
+## 📋 Comando Alternativo (Docker Directo)
 
-1. **Construir la imagen**:
-   ```bash
-   docker build -t google-scraper .
-   ```
+Si prefieres no usar docker-compose:
 
-2. **Ejecutar el contenedor**:
-   ```bash
-   docker run -v "%cd%/output:/app/output" google-scraper
-   ```
-   
-   (En Linux/Mac usar `${PWD}` en lugar de `%cd%`)
+```bash
+docker build -t google-scraper .
+docker run -v "%cd%/output:/app/output" google-scraper
+```
+
+(En Linux/Mac usar `${PWD}` en lugar de `%cd%`)
 
 ---
 
@@ -111,9 +104,8 @@ docker-compose --version
 | `requirements.txt` | Dependencias Python necesarias |
 | `search_google.py` | Script principal de web scraping |
 | `docker-compose.yml` | Configuración para Docker Compose |
-| `ejecutar.bat` | Script para Windows - ejecutar con doble clic |
-| `run.sh` | Script para Linux/Mac - ejecutar con ./run.sh |
-| `INSTALACION.md` | Este archivo |
+| `resultado_busqueda.json` | Archivo de salida con los resultados |
+| `output/` | Carpeta donde se guardan los resultados |
 
 ---
 
@@ -121,23 +113,18 @@ docker-compose --version
 
 ### En Windows (Task Scheduler)
 
-1. **Crear script batch** `ejecutar_scraper.bat`:
-   ```batch
-   @echo off
-   cd /d "C:\ruta\a\tu\DOCKER_DUMMY"
-   docker-compose up --remove-orphans
-   pause
-   ```
-
-2. **Abrir Task Scheduler**:
+1. **Abrir Task Scheduler**:
    - Presionar `Windows + R`
    - Escribir `taskschd.msc`
 
-3. **Crear tarea**:
+2. **Crear tarea**:
    - Click derecho > "Crear tarea básica"
    - Nombre: "Google News Scraper"
    - Trigger: Diario a las 08:00 AM (o la hora que desees)
-   - Action: Ejecutar programa `ejecutar_scraper.bat`
+   - Action: Ejecutar `powershell.exe` con argumentos:
+     ```
+     -Command "cd 'C:\ruta\a\tu\DOCKER_DUMMY'; docker-compose up --remove-orphans"
+     ```
 
 ### En Linux/Mac (Cron)
 
@@ -194,46 +181,51 @@ docker-compose --version
 
 ---
 
-## 🔍 Cómo Compartir con Terceros
+## 📊 Ver Logs (Rastrear la ejecución)
 
-### Paso 1: Preparar los archivos
-Asegúrate de tener estos archivos en la carpeta:
-- `Dockerfile`
-- `requirements.txt`
-- `search_google.py`
-- `docker-compose.yml`
-- `INSTALACION.md` (este archivo)
+### Opción 1: Ver logs en tiempo real (RECOMENDADO)
 
-### Paso 2: Empaquetar
-**Opción A - Comprimir carpeta**:
+Mientras el contenedor se está ejecutando, abre otra terminal en la carpeta y ejecuta:
+
 ```bash
-# Windows
-tar.exe -a -c -f DOCKER_DUMMY.zip DOCKER_DUMMY
-
-# Linux/Mac
-zip -r DOCKER_DUMMY.zip DOCKER_DUMMY
+docker-compose logs -f
 ```
 
-**Opción B - Git**:
+Esto mostrará todos los mensajes que genera el script en vivo. Presiona `Ctrl+C` para detener la visualización de logs.
+
+### Opción 2: Ver logs después de que terminó
+
+Si el contenedor ya terminó, aún puedes ver los logs:
+
 ```bash
-git init
-git add .
-git commit -m "Initial commit"
-git remote add origin [tu-repositorio]
-git push -u origin main
+docker-compose logs
 ```
 
-### Paso 3: Compartir
-- Enviar archivo ZIP por email
-- Compartir repositorio Git
-- Usar servicios como Google Drive, Dropbox, etc.
+### Opción 3: Ver logs de un contenedor específico
 
-### Instrucciones para el receptor
-El tercero debe:
-1. Descomprimir la carpeta
-2. Instalar Docker Desktop (si no lo tiene)
-3. Abrir terminal en la carpeta
-4. Ejecutar: `docker-compose build && docker-compose up`
+Si tienes varios contenedores corriendo:
+
+```bash
+docker logs <nombre_del_contenedor>
+```
+
+Para ver el nombre exacto del contenedor:
+
+```bash
+docker-compose ps
+```
+
+### Opción 4: Ver solo las últimas 50 líneas
+
+```bash
+docker-compose logs --tail=50
+```
+
+### Opción 5: Seguir logs y mostrar timestamps
+
+```bash
+docker-compose logs -f -t
+```
 
 ---
 
