@@ -50,7 +50,7 @@ docker-compose --version
 
 ---
 
-## �🚀 Instalación y Ejecución
+## 🚀 Instalación y Ejecución
 
 ### Paso 1: Verificar que Docker está corriendo
 - En Windows: Abre **Docker Desktop** y espera a que el icono esté en verde
@@ -83,18 +83,6 @@ Cuando el contenedor termine, verás un archivo `resultado_busqueda.json` en la 
 
 ---
 
-## 📋 Comando Alternativo (Docker Directo)
-
-Si prefieres no usar docker-compose:
-
-```bash
-docker build -t google-scraper .
-docker run -v "%cd%/output:/app/output" google-scraper
-```
-
-(En Linux/Mac usar `${PWD}` en lugar de `%cd%`)
-
----
 
 ## 📋 Archivos Incluidos
 
