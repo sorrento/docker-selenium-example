@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  google-scraper:
+    build: .
+    container_name: google-scraper-noticias
+    volumes:
+      - ./output:/app/output
+    environment:
+      - TZ=America/Caracas
+    restart: unless-stopped
