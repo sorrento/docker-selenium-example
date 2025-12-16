@@ -1,8 +1,8 @@
-# Docker - Web Scraper de Noticias Google
+# Docker - Ejemplo de Selenium  Noticias Google / Bing
 
 ## Descripción
-Este contenedor Docker ejecuta un script Python con Selenium que:
-- Accede a Google
+Este contenedor Docker ejecuta un script Python con Selenium de ejemplo que:
+- Accede a Google / Bing
 - Busca "Noticias" con la fecha del día actual
 - Extrae el título, URL y descripción del primer resultado
 - Guarda el resultado en un archivo JSON
@@ -27,7 +27,30 @@ docker-compose --version
 
 ---
 
-## 🚀 Instalación y Ejecución
+## � Descargar desde GitHub
+
+### Opción A: Clonar el repositorio (Recomendado)
+
+1. **Abrir PowerShell o CMD** en la carpeta donde quieras descargar el proyecto
+
+2. **Ejecutar**:
+   ```bash
+   git clone https://github.com/sorrento/docker-selenium-example.git
+   cd docker-selenium-example
+   ```
+
+3. **Listo**, ahora tienes todos los archivos en tu máquina
+
+### Opción B: Descargar como ZIP
+
+1. Ir a: https://github.com/sorrento/docker-selenium-example
+2. Click en **Code** > **Download ZIP**
+3. Extraer la carpeta descargada
+4. Listo para usar
+
+---
+
+## �🚀 Instalación y Ejecución
 
 ### Opción 1: Windows - Hacer doble clic (MÁS FÁCIL)
 
